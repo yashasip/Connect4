@@ -19,7 +19,7 @@ void draw_circle(int radius, int offset,color color_value)
         for (double i = 0; i <= 360; i += 0.1) // draw circle based on polar equation
         {
             x = radius * cos(i * PI / 180);
-            y = radius * sin(i * 3.142 / 180);
+            y = radius * sin(i * PI / 180);
             glVertex2d(offset + radius + x, offset + radius + y); // circle drawn at distance of offset + radius from window border
         }
     }
