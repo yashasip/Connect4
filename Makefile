@@ -1,6 +1,6 @@
 
 CC=clang-12
-CFLAGS=-g -Wall -Wextra -Wshadow -pedantic -lglut -lGLU -lGL
+CFLAGS=-g -Wall -Wextra -Wshadow -pedantic -lm -lglut -lGLU -lGL
 
 SRC=src
 OBJ=obj
