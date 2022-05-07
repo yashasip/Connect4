@@ -3,7 +3,7 @@
 
 #include "Constants.h"
 
-void draw_circle(int, int, color);
+void draw_circle(int, int, int, color);
 void draw_board();
 
 #endif

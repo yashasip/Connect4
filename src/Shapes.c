@@ -3,7 +3,7 @@
 #include<stdio.h>
 #include "Constants.h"
 
-void draw_circle(int radius, int offset,color color_value)
+void draw_circle(int radius, int offset_x, int offset_y, color color_value)
 {
     double y, x;
     glBegin(GL_POLYGON);
@@ -21,7 +21,7 @@ void draw_circle(int radius, int offset,color color_value)
         {
             x = radius * cos(i * PI / 180);
             y = radius * sin(i * PI / 180);
-            glVertex2d(offset + radius + x, offset + radius + y); // circle drawn at distance of offset + radius from window border
+            glVertex2d(offset_x + radius + x, offset_y + radius + y); // circle drawn at distance of offset + radius from window border
         }
     }
     glEnd();
