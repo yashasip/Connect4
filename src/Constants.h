@@ -4,6 +4,8 @@
 #define PI 3.14159265358979323846
 #define RADIUS 30.0 // radius of circle token
 #define OFFSET 100 // the drawing of tokens starts from
+#define WINDOW_WIDTH 900.0
+#define WINDOW_HEIGHT 790.0
 
 typedef enum color
 {
