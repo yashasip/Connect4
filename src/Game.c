@@ -1,8 +1,10 @@
 #include <GL/glut.h>
 #include "Constants.h"
+#include "Shapes.h"
 
 void init();
 void startGame();
+void drawSlots();
 
 void Connect4(int argc, char *argv[])
 {
@@ -20,6 +22,13 @@ void init()
 {
     glClearColor(1, 1, 1, 1);
     gluOrtho2D(0.0, WINDOW_WIDTH, 0.0, WINDOW_HEIGHT);
+}
+
+void drawSlots()
+{
+    for (int j = OFFSET_Y + SLOT_MARGIN, row = 0; row < 6; j += 2 * RADIUS + SLOT_MARGIN, row++)
+        for (int i = OFFSET_X + SLOT_MARGIN, column = 0; column < 7; i += 2 * RADIUS + SLOT_MARGIN, column++)
+            draw_circle(RADIUS, i, j, NONE);
 }
 
 void startGame()
