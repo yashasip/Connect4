@@ -1,9 +1,9 @@
 #include <GL/glut.h>
-#include<math.h>
-#include<stdio.h>
+#include <math.h>
+#include <stdio.h>
 #include "Constants.h"
 
-void draw_circle(int radius, int offset_x, int offset_y, color color_value)
+void drawCircle(int radius, int offset_x, int offset_y, color color_value)
 {
     double y, x;
     glBegin(GL_POLYGON);
@@ -19,7 +19,7 @@ void draw_circle(int radius, int offset_x, int offset_y, color color_value)
 
         for (double i = 0; i <= 360; i += 0.1) // draw circle based on polar equation
         {
-            x = radius * cos(i * PI / 180);
+            x = radius * cos(i * PI / 180); // converting i from degree to rads
             y = radius * sin(i * PI / 180);
             glVertex2d(offset_x + radius + x, offset_y + radius + y); // circle drawn at distance of offset + radius from window border
         }
@@ -27,14 +27,15 @@ void draw_circle(int radius, int offset_x, int offset_y, color color_value)
     glEnd();
 }
 
-void draw_board(){
+void drawBoard()
+{
     glBegin(GL_QUADS);
     {
         glColor3f(0.3255, 0.2235, 0.9961);
-        glVertex2i(100, 10);
-        glVertex2i(BOARD_WIDTH + 100, 10);
-        glVertex2i(BOARD_WIDTH + 100, 10 + BOARD_HEIGHT);
-        glVertex2i(100, 10 + BOARD_HEIGHT);
+        glVertex2i(OFFSET_X, OFFSET_Y);
+        glVertex2i(BOARD_WIDTH + OFFSET_X, OFFSET_Y);
+        glVertex2i(BOARD_WIDTH + OFFSET_X, OFFSET_Y + BOARD_HEIGHT);
+        glVertex2i(OFFSET_X, OFFSET_Y + BOARD_HEIGHT);
     }
     glEnd();
 }

@@ -28,12 +28,14 @@ void drawSlots()
 {
     for (int j = OFFSET_Y + SLOT_MARGIN, row = 0; row < 6; j += 2 * RADIUS + SLOT_MARGIN, row++)
         for (int i = OFFSET_X + SLOT_MARGIN, column = 0; column < 7; i += 2 * RADIUS + SLOT_MARGIN, column++)
-            draw_circle(RADIUS, i, j, NONE);
+            drawCircle(RADIUS, i, j, NONE);
 }
 
 void startGame()
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    drawBoard();
+    drawSlots();
 
     glFlush();
 }
