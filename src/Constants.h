@@ -6,6 +6,9 @@
 #define OFFSET 100 // the drawing of tokens starts from
 #define WINDOW_WIDTH 900.0
 #define WINDOW_HEIGHT 790.0
+#define BOARD_WIDTH 610
+#define BOARD_HEIGHT 535
+#define SLOT_MARGIN 25
 
 typedef enum color
 {

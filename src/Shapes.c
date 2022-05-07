@@ -27,15 +27,14 @@ void draw_circle(int radius, int offset,color color_value)
     glEnd();
 }
 
-void make_haunch(int radius, int offset){
+void draw_board(){
     glBegin(GL_QUADS);
-    printf("hello");
     {
         glColor3f(0.3255, 0.2235, 0.9961);
         glVertex2i(100, 10);
-        glVertex2i(600, 10);
-        glVertex2i(600, 600);
-        glVertex2i(100, 600);
+        glVertex2i(BOARD_WIDTH + 100, 10);
+        glVertex2i(BOARD_WIDTH + 100, 10 + BOARD_HEIGHT);
+        glVertex2i(100, 10 + BOARD_HEIGHT);
     }
     glEnd();
 }
