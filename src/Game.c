@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include "Constants.h"
 #include "Shapes.h"
+#include "Controller.h"
 
 // place token initial parameters
 int placeTokenX = OFFSET_X + SLOT_MARGIN;
@@ -34,16 +35,15 @@ void init()
 
 void drawSlots()
 {
-    for (int j = OFFSET_Y + SLOT_MARGIN, row = 0; row < 6; j += 2 * RADIUS + SLOT_MARGIN, row++)
-        for (int i = OFFSET_X + SLOT_MARGIN, column = 0; column < 7; i += 2 * RADIUS + SLOT_MARGIN, column++)
-            drawCircle(RADIUS, i, j, NONE);
+    for (int j = OFFSET_Y + SLOT_MARGIN, row = 0; row < BOARD_ROW_COUNT; j += 2 * RADIUS + SLOT_MARGIN, row++)
+        for (int i = OFFSET_X + SLOT_MARGIN, column = 0; column < BOARD_COLUMN_COUNT; i += 2 * RADIUS + SLOT_MARGIN, column++)
+            drawCircle(RADIUS, i, j, getSlotColor(row, column));
     drawCircle(RADIUS, placeTokenX, placeTokenY, placeTokenColor); // place token
 }
 
 // keyboard input process function
 void keyboardInput(int key, int x, int y)
 {
-
     switch (key)
     {
     case GLUT_KEY_RIGHT: // right arrow key
@@ -56,7 +56,15 @@ void keyboardInput(int key, int x, int y)
         if (placeTokenX < OFFSET_X + SLOT_MARGIN) // when in first column, set previous column to last column
             placeTokenX = OFFSET_X + BOARD_WIDTH - SLOT_MARGIN - 2 * RADIUS;
         break;
-    case 13:                           // enter key
+    case 13: // enter key
+    {
+        int column = (placeTokenX - OFFSET_X - SLOT_MARGIN) / (int)(2 * RADIUS + SLOT_MARGIN); // compute column based on coordinates
+        bool filled = isSlotFilled(column, placeTokenColor);
+
+        if (!filled) // if new token is not placed
+            return;
+    } // flower brackets to declare within switch
+
         if (placeTokenColor == YELLOW) // switch token color
             placeTokenColor = RED;
         else if (placeTokenColor == RED)
