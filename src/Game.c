@@ -2,6 +2,7 @@
 #include "Constants.h"
 #include "Shapes.h"
 
+// place token initial parameters
 int placeTokenX = OFFSET_X + SLOT_MARGIN;
 int placeTokenY = OFFSET_Y + BOARD_HEIGHT + RADIUS;
 color placeTokenColor = YELLOW;
@@ -18,9 +19,9 @@ void Connect4(int argc, char *argv[])
     glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
     glutInitWindowPosition(glutGet(GLUT_SCREEN_HEIGHT) / 2, 0);
     glutCreateWindow("Connect 4");
-    init(); // initialize parameters
-    glutSpecialFunc(keyboardInput);
-    glutKeyboardFunc(keyboardInput);
+    init();                          // initialize parameters
+    glutSpecialFunc(keyboardInput);  // special keyboard keys input process
+    glutKeyboardFunc(keyboardInput); // keyboard input process
     glutDisplayFunc(startGame);
     glutMainLoop();
 }
@@ -39,27 +40,30 @@ void drawSlots()
     drawCircle(RADIUS, placeTokenX, placeTokenY, placeTokenColor); // place token
 }
 
-void keyboardInput(int key, int x, int y){
+// keyboard input process function
+void keyboardInput(int key, int x, int y)
+{
 
-    switch(key){
-        case GLUT_KEY_RIGHT:
-            placeTokenX = placeTokenX + 2 * RADIUS + SLOT_MARGIN;
-            if (placeTokenX > OFFSET_X + BOARD_WIDTH - SLOT_MARGIN)
-                placeTokenX = OFFSET_X + SLOT_MARGIN;
-            break;
-        case GLUT_KEY_LEFT:
-            placeTokenX = placeTokenX - 2 * RADIUS - SLOT_MARGIN;
-            if (placeTokenX < OFFSET_X + SLOT_MARGIN)
-                placeTokenX = OFFSET_X + BOARD_WIDTH - SLOT_MARGIN - 2 * RADIUS;
-            break;
-        case 13:
-            if(placeTokenColor == YELLOW)
-                placeTokenColor = RED;
-            else if(placeTokenColor == RED)
-                placeTokenColor = YELLOW;
-            break;
-        default:
-            return;
+    switch (key)
+    {
+    case GLUT_KEY_RIGHT: // right arrow key
+        placeTokenX = placeTokenX + 2 * RADIUS + SLOT_MARGIN;
+        if (placeTokenX > OFFSET_X + BOARD_WIDTH - SLOT_MARGIN) // when last column reached, set next column to start column
+            placeTokenX = OFFSET_X + SLOT_MARGIN;
+        break;
+    case GLUT_KEY_LEFT: // left arrow key
+        placeTokenX = placeTokenX - 2 * RADIUS - SLOT_MARGIN;
+        if (placeTokenX < OFFSET_X + SLOT_MARGIN) // when in first column, set previous column to last column
+            placeTokenX = OFFSET_X + BOARD_WIDTH - SLOT_MARGIN - 2 * RADIUS;
+        break;
+    case 13:                           // enter key
+        if (placeTokenColor == YELLOW) // switch token color
+            placeTokenColor = RED;
+        else if (placeTokenColor == RED)
+            placeTokenColor = YELLOW;
+        break;
+    default: // unassigned keys
+        return;
     }
 
     glutPostRedisplay();
@@ -70,6 +74,6 @@ void startGame()
     glClear(GL_COLOR_BUFFER_BIT);
     drawBoard();
     drawSlots();
-    
+
     glFlush();
 }
