@@ -4,6 +4,7 @@
 
 int placeTokenX = OFFSET_X + SLOT_MARGIN;
 int placeTokenY = OFFSET_Y + BOARD_HEIGHT + RADIUS;
+color placeTokenColor = YELLOW;
 
 void init();
 void startGame();
@@ -19,6 +20,7 @@ void Connect4(int argc, char *argv[])
     glutCreateWindow("Connect 4");
     init(); // initialize parameters
     glutSpecialFunc(keyboardInput);
+    glutKeyboardFunc(keyboardInput);
     glutDisplayFunc(startGame);
     glutMainLoop();
 }
@@ -34,7 +36,7 @@ void drawSlots()
     for (int j = OFFSET_Y + SLOT_MARGIN, row = 0; row < 6; j += 2 * RADIUS + SLOT_MARGIN, row++)
         for (int i = OFFSET_X + SLOT_MARGIN, column = 0; column < 7; i += 2 * RADIUS + SLOT_MARGIN, column++)
             drawCircle(RADIUS, i, j, NONE);
-    drawCircle(RADIUS, placeTokenX, placeTokenY, YELLOW); // place token
+    drawCircle(RADIUS, placeTokenX, placeTokenY, placeTokenColor); // place token
 }
 
 void keyboardInput(int key, int x, int y){
@@ -49,6 +51,12 @@ void keyboardInput(int key, int x, int y){
             placeTokenX = placeTokenX - 2 * RADIUS - SLOT_MARGIN;
             if (placeTokenX < OFFSET_X + SLOT_MARGIN)
                 placeTokenX = OFFSET_X + BOARD_WIDTH - SLOT_MARGIN - 2 * RADIUS;
+            break;
+        case 13:
+            if(placeTokenColor == YELLOW)
+                placeTokenColor = RED;
+            else if(placeTokenColor == RED)
+                placeTokenColor = YELLOW;
             break;
         default:
             return;
