@@ -5,5 +5,6 @@
 
 bool isSlotFilled(int, color);
 color getSlotColor(int, int);
+bool isFourConnect(int, color);
 
 #endif

@@ -4,6 +4,7 @@
 #include "Controller.h"
 
 // place token initial parameters
+bool gameOver = false;
 int placeTokenX = OFFSET_X + SLOT_MARGIN;
 int placeTokenY = OFFSET_Y + BOARD_HEIGHT + RADIUS;
 color placeTokenColor = YELLOW;
@@ -12,6 +13,7 @@ void init();
 void startGame();
 void drawSlots();
 void keyboardInput(int, int, int);
+void switchTurn();
 
 void Connect4(int argc, char *argv[])
 {
@@ -44,6 +46,9 @@ void drawSlots()
 // keyboard input process function
 void keyboardInput(int key, int x, int y)
 {
+    if(gameOver)
+        return;
+
     switch (key)
     {
     case GLUT_KEY_RIGHT: // right arrow key
@@ -63,18 +68,28 @@ void keyboardInput(int key, int x, int y)
 
         if (!filled) // if new token is not placed
             return;
-    } // flower brackets to declare within switch
 
-        if (placeTokenColor == YELLOW) // switch token color
-            placeTokenColor = RED;
-        else if (placeTokenColor == RED)
-            placeTokenColor = YELLOW;
+        if(isFourConnect(column, placeTokenColor)){
+            printf("WINS");
+            gameOver = true;
+            placeTokenColor = NONE;
+        }
+        else
+            switchTurn();
         break;
+    } // flower brackets to declare within switch
     default: // unassigned keys
         return;
     }
-
     glutPostRedisplay();
+}
+
+void switchTurn()
+{
+    if (placeTokenColor == YELLOW) // switch token color
+        placeTokenColor = RED;
+    else if (placeTokenColor == RED)
+        placeTokenColor = YELLOW;
 }
 
 void startGame()
