@@ -1,4 +1,3 @@
-bin/**
-obj/**
-logs/**
+bin/Connect4
+obj/*.o
 .vscode/
