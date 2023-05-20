@@ -45,7 +45,7 @@ void drawSlots()
             drawCircle(RADIUS, i, j, getSlotColor(row, column));
 }
 
-drawPlaceToken(){
+void drawPlaceToken(){
     drawCircle(RADIUS, placeTokenX, placeTokenY, placeTokenColor); // place token
 }
 
