@@ -1,4 +1,3 @@
-
 CC=clang-12
 CFLAGS=-g -Wall -Wextra -Wshadow -pedantic -lm -lglut -lGLU -lGL
 
@@ -29,4 +28,3 @@ clean:
 submit:
 	$(RM) $(ZIPNAME)
 	zip $(ZIPNAME) $(BIN)
-
