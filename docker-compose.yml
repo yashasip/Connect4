@@ -1,0 +1,13 @@
+version: '3'
+services:
+  glut-app:
+    build: .
+    container_name: connect4
+    command: 
+      "bin/Connect4"
+    volumes:
+      - ./src:/app/src
+      - ./Makefile:/app/Makefile
+      - ./bin:/app/bin
+      - ./obj:/app/obj
+      - ./logs:/app.logs
